@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Scheda 2026 · Danilo Griffo</title>
+<style>
+:root{--bg:#0f172a;--c:#1e293b;--b:#334155;--m:#94a3b8;--a:#f97316;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+body{background:var(--bg);color:#f8fafc;padding:12px;max-width:720px;margin:0 auto;line-height:1.4}
+h1{font-size:1.15rem}h2{font-size:1.05rem}.m{color:var(--m);font-size:.82rem}
+.card{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;margin:10px 0}
+.row{display:flex;gap:6px;align-items:center}.sp{justify-content:space-between}
+button{background:var(--b);color:#fff;border:0;border-radius:9px;padding:9px 12px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:10px 0}.tabs button{padding:8px 2px;font-size:.78rem}
+.tabs .on,.go{background:var(--a);color:#1c0a00}
+.go{width:100%;margin-top:8px}
+input,select{background:#0f172a;color:#fff;border:1px solid var(--b);border-radius:8px;padding:8px;font-size:.95rem;width:100%;min-width:0}
+.set{display:grid;grid-template-columns:78px 1fr 1fr;gap:6px;align-items:center;margin-top:6px}
+.set small{font-size:.72rem;color:var(--m)}.t{color:var(--a);font-weight:700}
+.tag{font-size:.7rem;background:var(--b);padding:2px 7px;border-radius:6px;color:var(--m)}
+.res{background:#1c1917;border-left:3px solid var(--a);border-radius:6px;padding:8px;margin-top:8px;font-size:.84rem}
+details{margin-top:8px;font-size:.82rem;color:#cbd5e1}summary{color:var(--a);cursor:pointer}
+.ok{background:#064e3b;color:#6ee7b7}
+</style>
+</head>
+<body>
+<div class="row sp"><h1>SCHEDA 2026 · High Intensity / Low Volume</h1></div>
+<p class="m">Focus: Gran Dorsale ("Ali") e Braccia Enormi</p>
+<details><summary>Regola d'oro</summary>
+<p>Le serie indicate sono quelle EFFETTIVE a cedimento tecnico (RPE 10 / RIR 0). Fai sempre 1-2 serie di riscaldamento sui primi esercizi senza stancarti. Recuperi: 2'30"-3' sui multiarticolari, 1'30"-2' sugli isolamenti.</p></details>
+<div class="row sp" style="margin-top:10px"><button data-a="pw">‹</button><b id="wk"></b><button data-a="nw">›</button></div>
+<div class="tabs" id="tabs"></div>
+<div id="day"></div>
+<script>
+const x = (n, r) => Array(n).fill(r), TB = ['T6-8', 'B8-10'];
+const D = [
+ { t: 'G1 · Upper A', f: 'Focus Ali + Petto Alto + Braccia Stretch', e: [
+  ['Trazioni zavorrate (o Lat neutra stretta)', 'Priorità Ali', TB, 'Top +7,5 kg · Back-off +2,5 kg o corpo libero', 'Gomiti stretti spinti in basso/avanti. Niente serie max finale.'],
+  ['Panca inclinata 30° (Multipower o manubri)', '', TB, 'Top 18-20 kg/lato · Back-off 16 kg/lato', 'Discesa controllata 2s, RIR 0-1.'],
+  ['Pulley basso in cifosi con triangolo (straps)', '', TB, 'Top 72,5-75 kg · Back-off 65 kg', 'Tira verso ombelico/basso ventre, gomiti rasenti ai fianchi.'],
+  ['Chest-supported row manubri su panca 30°', '', x(2, '8-10'), '', 'Gomiti larghi a 60°, fermo di 1s in contrazione (upper back).'],
+  ['Croci ai cavi bassi', '', x(2, '10-12'), '', 'Controlla il massimo allungamento a RPE 10.'],
+  ['6A Bayesian curl ai cavi bassi', 'Superserie braccia', x(2, '8-10'), '', 'Un passo avanti, gomito dietro il busto.'],
+  ['6B French press EZ panca 30°', 'Superserie braccia', x(2, '8-10'), '37,5-40 kg', 'Dietro la testa.']] },
+ { t: 'G2 · Gambe 1', f: 'Focus Quadricipiti + Richiamo Femorali', e: [
+  ['Leg press (piedi bassi, discesa profonda)', '', ['T6-8', 'B10-12'], 'Top 45-50 kg · Back-off 35-40 kg', ''],
+  ['Squat in ginocchio Multipower / Bulgarian / Hack Squat', '', x(2, '8-10'), '', 'Spinte a RIR 0-1 vero.'],
+  ['Leg curl seduto (o sdraiato)', '', x(2, '10-12'), '20-22,5 kg', ''],
+  ['Sissy squat / Leg extension', '', x(2, '10-12'), '35-40 kg', 'Drop-set concesso solo alla fine della 2a serie.'],
+  ['Calf alla pressa a gambe tese (o seduto)', '', x(3, '12-15'), '', '2 secondi di fermo in massimo allungamento in basso.']] },
+ { t: 'G3 · Braccia & Spalle', f: 'Focus Braccia Enormi · 3 angoli', e: [
+  ['Curl in piedi con bilanciere EZ', 'Mid-range', TB, 'Top 26-28 kg · Back-off 22 kg', 'Senza dondolare.'],
+  ['French press EZ panca 30° (o Overhead cavo basso corda)', 'Allungamento', TB, 'Top 40-42,5 kg · Back-off 35 kg', 'Fai UNO solo dei due esercizi sopra la testa dando il 100%.'],
+  ['Curl manubri su panca inclinata 60°', 'Allungamento', x(2, '8-10'), '10-12 kg', 'Gomiti fermi dietro il busto.'],
+  ['Pushdown al cavo alto (barra V o corda)', 'Mid/Accorciamento', TB, 'Top 42,5-45 kg · Back-off 40 kg', '1s di blocco a gomito esteso.'],
+  ['Preacher curl su panca Scott', 'Accorciamento', x(2, '8-10'), '15+ kg', ''],
+  ['Hammer curl manubri', 'Brachiale', x(2, '8-10'), '', ''],
+  ['Pushdown singolo cavo alto (o Dip)', 'Accorciamento', x(2, '8-10'), '', 'Spingi in basso/indietro per accorciare al massimo il tricipite.'],
+  ['Spinte manubri da seduto (panca 75-80°)', '', TB, 'Top 20-22 kg · Back-off 18 kg', ''],
+  ['Alzate laterali manubri', '', x(2, '10-12'), '10-12 kg fissi (non scendere a 8 kg)', '+1 drop set finale sulla 2a serie.']] },
+ { t: 'G4 · Gambe 2', f: 'Focus Femorali / Glutei + Richiamo Quad', e: [
+  ['Stacchi rumeni (manubri o EZ con straps)', '', TB, '40-45 kg', 'Discesa a metà tibia, schiena neutra.'],
+  ['Leg curl sdraiato o seduto', '', x(2, '10-12'), '20-22,5 kg (RPE 10)', ''],
+  ['Leg press piedi larghi e alti', '', x(2, '10-12'), '', ''],
+  ['Leg extension', '', x(2, '10-12'), '35-40 kg (RPE 10)', ''],
+  ['Calf in piedi', '', x(3, '12-15'), '', '2s di fermo in basso.']] },
+ { t: 'G5 · Upper B', f: 'Focus Ali Unilaterale + Spessore + Petto/Spalle', e: [
+  ['Lat machine singola / Rematore unilaterale', 'Focus Ali', ['T6-8', 'B8-10', 'B8-10'], 'Top 27,5-30 kg · Back-off 25 kg per lato', 'Gomito tirato verso il fianco/tasca dei pantaloni.'],
+  ['Chest press', '', TB, 'Top 65-70 kg · Back-off 55-60 kg', ''],
+  ['Pulley barra larga prona (tirata allo sterno, straps)', 'Upper back', TB, 'Top 55-60 kg · Back-off 50 kg', ''],
+  ['Alzate laterali al cavo basso (o manubri)', '', x(3, '12-15'), '', 'Cavo ad altezza polso per massima tensione in allungamento.'],
+  ['Deltoide posteriore cavi incrociati / Reverse pec deck', '', x(2, '12-15'), '', ''],
+  ['6A Hammer curl / Curl inverso cavo', 'Superserie finale', x(2, '10-12'), '', ''],
+  ['6B Dip tra panche / Pushdown singolo', 'Superserie finale', x(2, '10-12'), '', '']] }
+];
+const $ = s => document.querySelector(s), K = 'sa2026';
+let ED = null, S; try { S = JSON.parse(localStorage.getItem(K)); } catch (e) { S = null; }
+S = S || { w: 1, d: 0, log: {}, done: {}, ov: {} }; S.ov = S.ov || {};
+const save = () => { try { localStorage.setItem(K, JSON.stringify(S)); } catch (e) {} };
+const R = s => { const m = s.replace(/^[TB]/, '').split('-').map(Number); return [m[0], m[1] || m[0]]; };
+const fmt = n => String(+n.toFixed(1)).replace('.', ',');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const L = (w, d, i) => ((S.log[w] = S.log[w] || {})[d] = S.log[w][d] || {})[i] = (S.log[w][d][i] || { s: [], rpe: '' });
+const got = (w, d, i, j) => { const r = ((S.log[w] || {})[d] || {})[i]; return r && r.s[j]; };
+
+// Nome effettivo dell'esercizio (con eventuali sostituzioni)
+function nm(w, d, i) {
+  const o = S.ov, orig = D[d].e[i][0], one = o[w + '|' + d + '|' + i];
+  if (one !== undefined) return one || orig;
+  let n = orig; (o[d + '|' + i] || []).forEach(r => { if (r.f <= w) n = r.n || orig; });
+  return n;
+}
+function advice(d, i, w) {
+  const e = D[d].e[i], out = [];
+  e[2].forEach((t, j) => {
+    const v = got(w, d, i, j); if (!v || !v.k || !v.r) return;
+    const [lo, hi] = R(t), inc = Math.max(1, Math.round(v.k * .05 * 2) / 2);
+    const nx = v.r >= hi ? 'alza a ' + fmt(v.k + inc) + ' kg (+' + fmt(inc) + ')' : v.r < lo ? 'abbassa a ' + fmt(Math.round((v.k - inc) * 2) / 2) + ' kg (-' + fmt(inc) + ')' : 'resta a ' + fmt(v.k) + ' kg e punta a ' + hi + ' rep';
+    out.push('Serie ' + (j + 1) + ': ' + fmt(v.k) + '×' + v.r + ' → prossima volta ' + nx);
+    if (t[0] == 'T') { const f = v.r >= hi ? .9 : v.r < lo ? .82 : .87; out.push('<b>In seduta</b> · back-off consigliato: ' + fmt(Math.round(v.k * f * 2) / 2) + ' kg'); }
+  });
+  return out;
+}
+function vol(w, d) { let t = 0; D[d].e.forEach((e, i) => e[2].forEach((_, j) => { const v = got(w, d, i, j); if (v && v.k && v.r) t += v.k * v.r; })); return Math.round(t); }
+
+function show() {
+  const w = S.w, d = S.d;
+  $('#wk').textContent = 'Settimana ' + w;
+  $('#tabs').innerHTML = D.map((y, i) => `<button data-d="${i}" class="${i == d ? 'on' : ''}">G${i + 1}</button>`).join('');
+  const Y = D[d], tot = Y.e.reduce((s, e) => s + e[2].length, 0);
+  $('#day').innerHTML = `<h2>${Y.t}</h2><p class="m">${Y.f} · ${tot} serie effettive</p>` + Y.e.map((e, i) => {
+    const rec = L(w, d, i), hasT = e[2].some(t => t[0] == 'T'), cur = nm(w, d, i), sw = cur !== e[0];
+    return `<div class="card"><div class="row sp"><b>${i + 1}. ${esc(cur)}</b>${e[1] && !sw ? `<span class="tag">${esc(e[1])}</span>` : ''}</div>
+    ${sw ? `<p class="m">Al posto di: ${esc(e[0])} · serie e ripetizioni come da scheda</p>` : ''}${e[3] && !sw ? `<p class="m">Carico rif: ${esc(e[3])}</p>` : ''}${e[4] && !sw ? `<p class="m">${esc(e[4])}</p>` : ''}`
+    + e[2].map((t, j) => {
+      const v = rec.s[j] || {}, p = nm(w - 1, d, i) === cur ? got(w - 1, d, i, j) : null, lab = t[0] == 'T' ? 'Top ' + t.slice(1) : t[0] == 'B' ? 'Back-off ' + t.slice(1) : 'Serie ' + (j + 1) + ' · ' + t;
+      return `<div class="set"><span class="${t[0] == 'T' ? 't' : ''}">${lab}${p && p.k ? `<br><small>prec ${fmt(p.k)}×${p.r || '-'}</small>` : ''}</span>
+      <input type="number" inputmode="decimal" placeholder="kg" value="${v.k == null ? '' : v.k}" data-i="${i}" data-j="${j}" data-f="k">
+      <input type="number" inputmode="numeric" placeholder="rep" value="${v.r == null ? '' : v.r}" data-i="${i}" data-j="${j}" data-f="r"></div>`;
+    }).join('')
+    + `<div class="row" style="margin-top:8px"><select data-i="${i}" data-f="rpe"><option value="">Intensità percepita (RPE)</option>${[6, 7, 8, 9, 10].map(n => `<option ${rec.rpe == n ? 'selected' : ''}>${n}</option>`).join('')}</select><button data-a="c" data-i="${i}">Calcola</button><button data-a="ch" data-i="${i}">✎ Cambia</button></div>
+    <div class="res" id="r${i}" hidden></div>${ED && ED.d == d && ED.w == w && ED.i == i ? `<div class="res"><b>Nuovo esercizio</b><input id="ni" placeholder="Scrivi il nome" value="${sw ? esc(cur) : ''}" style="margin-top:6px"><div class="row" style="margin-top:6px"><button data-a="o" data-i="${i}">Solo questa settimana</button><button data-a="f" data-i="${i}">Da ora in poi</button></div><div class="row" style="margin-top:6px"><button data-a="x" data-i="${i}">Ripristina originale</button><button data-a="no">Annulla</button></div></div>` : ''}`
+    + (hasT ? `<details><summary>Cos'è il back-off e come farlo</summary><p>Il back-off è la serie che fai subito dopo la top set riducendo il carico del 10-15%, per fare più ripetizioni (qui ${e[2].find(t => t[0] == 'B').slice(1)}) sempre a cedimento tecnico. Esempio: top set 70 kg × 7 rep → recuperi 2'30"-3', abbassi a circa 62 kg e vai a cedimento nel range indicato. Se nel top set fai più ripetizioni del range, il back-off si abbassa meno; se ne fai meno, di più. Inserisci kg e rep fatte e tocca Calcola: ti dico di quanto alzare, abbassare o restare, sia in seduta sia la volta dopo.</p></details>` : '') + '</div>';
+  }).join('')
+  + `<button class="go ${S.done[w + '|' + d] ? 'ok' : ''}" data-a="dn">${S.done[w + '|' + d] ? '✓ Giorno completato' : 'Segna giorno completato'}</button><button class="go" style="background:var(--b);color:#fff" data-a="rp">Resoconto del giorno / settimana</button><div class="card" id="rep" hidden></div>`;
+}
+
+document.addEventListener('input', e => {
+  const t = e.target, i = t.dataset.i; if (i == null) return;
+  const rec = L(S.w, S.d, i);
+  if (t.dataset.f == 'rpe') rec.rpe = t.value; else { const s = rec.s[+t.dataset.j] = rec.s[+t.dataset.j] || {}; s[t.dataset.f] = t.value === '' ? null : +t.value; }
+  save();
+});
+document.addEventListener('click', e => {
+  const t = e.target, a = t.dataset.a;
+  if (t.dataset.d != null) { S.d = +t.dataset.d; save(); show(); return; }
+  if (!a) return;
+  if (a == 'pw' && S.w > 1) { S.w--; save(); show(); }
+  if (a == 'nw') { S.w++; save(); show(); }
+  if (a == 'dn') { S.done[S.w + '|' + S.d] = !S.done[S.w + '|' + S.d]; save(); show(); }
+  if (a == 'c') { const o = advice(S.d, +t.dataset.i, S.w), r = $('#r' + t.dataset.i); r.hidden = false; r.innerHTML = o.length ? o.join('<br>') : 'Inserisci kg e rep per calcolare.'; }
+  if (a == 'ch') { ED = { d: S.d, w: S.w, i: +t.dataset.i }; show(); const el = $('#ni'); if (el) el.focus(); return; }
+  if (a == 'no') { ED = null; show(); return; }
+  if (a == 'o' || a == 'f' || a == 'x') {
+    const i = +t.dataset.i, key = S.d + '|' + i, nn = a == 'x' ? '' : ($('#ni').value || '').trim();
+    if (a == 'o') S.ov[S.w + '|' + key] = nn;
+    else {
+      delete S.ov[S.w + '|' + key];
+      S.ov[key] = (S.ov[key] || []).filter(r => r.f != S.w).concat({ f: S.w, n: nn }).sort((p, q) => p.f - q.f);
+    }
+    ED = null; save(); show(); return;
+  }
+  if (a == 'rp') {
+    const w = S.w, rows = [];
+    D.forEach((Y, d) => {
+      const v = vol(w, d); if (!v && !S.done[w + '|' + d]) return;
+      const pv = vol(w - 1, d), df = pv ? Math.round((v - pv) / pv * 100) : null;
+      let up = 0, dn = 0;
+      Y.e.forEach((e, i) => advice(d, i, w).forEach(l => { if (l.includes('alza')) up++; if (l.includes('abbassa')) dn++; }));
+      rows.push(`<p><b>${Y.t}</b> ${S.done[w + '|' + d] ? '✓' : '(in corso)'}<br><span class="m">Volume ${v} kg${df == null ? '' : ' · ' + (df >= 0 ? '+' : '') + df + '% vs sett. prec.'} · serie da alzare: ${up} · da abbassare: ${dn}</span></p>`);
+    });
+    const r = $('#rep'); r.hidden = false;
+    r.innerHTML = '<b>Resoconto settimana ' + w + '</b>' + (rows.join('') || '<p class="m">Nessun dato inserito.</p>');
+  }
+});
+show();
+</script>
+</body>
+</html>
